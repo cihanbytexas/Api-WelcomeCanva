@@ -18,7 +18,6 @@ exports.generateWelcomeImage = async (req, res) => {
   const textColor = req.query.textColor || '#FFFFFF';
   const borderColor = req.query.borderColor || '#FF0000';
   const customText = (req.query.customText || 'Gracias por estar con nosotros').toUpperCase();
-  const welcomeText = (req.query.welcomeText || 'TEXAS').toUpperCase();
 
   // Imprimir los valores finales de los parámetros para depuración
   console.log('Processed Parameters:', {
