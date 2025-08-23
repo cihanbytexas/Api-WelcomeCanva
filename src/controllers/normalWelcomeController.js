@@ -11,13 +11,14 @@ exports.generateWelcomeImage = async (req, res) => {
   console.log('Query Parameters:', req.query);
 
   // Extraer y Validar Parámetros
-  const username = (req.query.username || 'Usuario').toUpperCase();
+  const username = (req.query.username || 'Texas').toUpperCase();
   const avatarUrl = req.query.avatarUrl || '';
   const backgroundUrl = req.query.backgroundUrl || path.join(__dirname, '..', 'assets', 'default-bg.png');
   const logoUrl = req.query.logoUrl || path.join(__dirname, '..', 'assets', 'default-logo.png');
   const textColor = req.query.textColor || '#FFFFFF';
   const borderColor = req.query.borderColor || '#FF0000';
   const customText = (req.query.customText || 'Gracias por estar con nosotros').toUpperCase();
+  const welcomeText = (req.query.welcomeText || 'TEXAS').toUpperCase();
 
   // Imprimir los valores finales de los parámetros para depuración
   console.log('Processed Parameters:', {
@@ -31,7 +32,7 @@ exports.generateWelcomeImage = async (req, res) => {
     welcomeText
   });
 
-  const welcomeText = 'BIENVENIDO'; // Texto fijo de bienvenida
+  const welcomeText = 'TEXAS'; // Texto fijo de bienvenida
 
   const width = 1920;
   const height = 1080;
