@@ -27,7 +27,8 @@ exports.generateWelcomeImage = async (req, res) => {
     logoUrl,
     textColor,
     borderColor,
-    customText
+    customText,
+    welcomeText
   });
 
   const welcomeText = 'BIENVENIDO'; // Texto fijo de bienvenida
