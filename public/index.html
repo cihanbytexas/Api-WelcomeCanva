@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
     <title>Welcome Image API</title>
@@ -7,8 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         a {
-          color: #df145f; /* Indigo-700 */
-
+          color: #df145f;
         }
     </style>
   </head>
@@ -16,32 +15,33 @@
 
     <div class="max-w-6xl mx-auto p-8">
       <h1 class="text-5xl font-bold text-indigo-600 mb-6">Welcome Image API</h1>
-      <p class="mb-10 text-lg">Generá imágenes de bienvenida y calendarios.</p>
+      <p class="mb-10 text-lg">Hoş geldin görselleri ve takvimler oluştur.</p>
 
       <!-- ========== ENDPOINT: GENERATE-WELCOME ========== -->
       <section class="mb-16">
         <h2 class="text-3xl font-semibold text-indigo-700 mb-4">🧾 /canvas/generate-welcome</h2>
-        <p class="mb-2">Imagen de bienvenida estándar.</p>
+        <p class="mb-2">Standart hoş geldin görseli.</p>
         <code class="block bg-gray-200 text-sm p-3 rounded mb-4">GET /canvas/generate-welcome</code>
 
-        <h3 class="text-xl font-semibold mb-2">Parámetros:</h3>
+        <h3 class="text-xl font-semibold mb-2">Parametreler:</h3>
         <table class="w-full text-left border-collapse border border-gray-300 mb-4">
           <thead class="bg-gray-200">
             <tr>
-              <th class="px-4 py-2 border">Parámetro</th>
-              <th class="px-4 py-2 border">Tipo</th>
-              <th class="px-4 py-2 border">Default</th>
-              <th class="px-4 py-2 border">Descripción</th>
+              <th class="px-4 py-2 border">Parametre</th>
+              <th class="px-4 py-2 border">Tip</th>
+              <th class="px-4 py-2 border">Varsayılan</th>
+              <th class="px-4 py-2 border">Açıklama</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td class="border px-4 py-2">username</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Usuario"</td><td class="border px-4 py-2">Nombre del usuario.</td></tr>
-            <tr><td class="border px-4 py-2">avatarUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Default</td><td class="border px-4 py-2">URL del avatar del usuario.</td></tr>
-            <tr><td class="border px-4 py-2">backgroundUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Default</td><td class="border px-4 py-2">Imagen de fondo personalizada.</td></tr>
-            <tr><td class="border px-4 py-2">logoUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Ninguno</td><td class="border px-4 py-2">Logo que aparece en la esquina superior derecha.</td></tr>
-            <tr><td class="border px-4 py-2">textColor</td><td class="border px-4 py-2">hex</td><td class="border px-4 py-2">#FFFFFF</td><td class="border px-4 py-2">Color del texto.</td></tr>
-            <tr><td class="border px-4 py-2">borderColor</td><td class="border px-4 py-2">hex</td><td class="border px-4 py-2">#FF0000</td><td class="border px-4 py-2">Color del borde del avatar.</td></tr>
-            <tr><td class="border px-4 py-2">customText</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Gracias por estar con nosotros"</td><td class="border px-4 py-2">Texto principal.</td></tr>
+            <tr><td class="border px-4 py-2">username</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Kullanıcı"</td><td class="border px-4 py-2">Kullanıcının adı.</td></tr>
+            <tr><td class="border px-4 py-2">avatarUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Varsayılan</td><td class="border px-4 py-2">Kullanıcı avatarının URL’si.</td></tr>
+            <tr><td class="border px-4 py-2">backgroundUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Varsayılan</td><td class="border px-4 py-2">Özel arka plan resmi.</td></tr>
+            <tr><td class="border px-4 py-2">logoUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Yok</td><td class="border px-4 py-2">Sağ üst köşede gözükecek logo.</td></tr>
+            <tr><td class="border px-4 py-2">textColor</td><td class="border px-4 py-2">hex</td><td class="border px-4 py-2">#FFFFFF</td><td class="border px-4 py-2">Yazı rengi.</td></tr>
+            <tr><td class="border px-4 py-2">borderColor</td><td class="border px-4 py-2">hex</td><td class="border px-4 py-2">#FF0000</td><td class="border px-4 py-2">Avatar çerçevesi rengi.</td></tr>
+            <tr><td class="border px-4 py-2">customText</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Bizimle olduğun için teşekkürler"</td><td class="border px-4 py-2">Ana metin.</td></tr>
+            <tr><td class="border px-4 py-2">welcomeText</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Hoş Geldin"</td><td class="border px-4 py-2">Başlık yazısı.</td></tr>
           </tbody>
         </table>
       </section>
@@ -49,25 +49,25 @@
       <!-- ========== ENDPOINT: CUTE-WELCOME ========== -->
       <section class="mb-16">
         <h2 class="text-3xl font-semibold text-pink-600 mb-4">🐰 /canvas/cute-welcome</h2>
-        <p class="mb-2">Imagen de bienvenida estilo kawaii, con avatar redondo y fondo oscuro.</p>
+        <p class="mb-2">Kawaii tarzında hoş geldin görseli, yuvarlak avatar ve koyu arka plan.</p>
         <code class="block bg-gray-200 text-sm p-3 rounded mb-4">GET /canvas/cute-welcome</code>
 
-        <h3 class="text-xl font-semibold mb-2">Parámetros:</h3>
+        <h3 class="text-xl font-semibold mb-2">Parametreler:</h3>
         <table class="w-full text-left border-collapse border border-gray-300 mb-4">
           <thead class="bg-gray-200">
             <tr>
-              <th class="px-4 py-2 border">Parámetro</th>
-              <th class="px-4 py-2 border">Tipo</th>
-              <th class="px-4 py-2 border">Default</th>
-              <th class="px-4 py-2 border">Descripción</th>
+              <th class="px-4 py-2 border">Parametre</th>
+              <th class="px-4 py-2 border">Tip</th>
+              <th class="px-4 py-2 border">Varsayılan</th>
+              <th class="px-4 py-2 border">Açıklama</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td class="border px-4 py-2">username</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Nombre de Usuario"</td><td class="border px-4 py-2">Nombre que se mostrará.</td></tr>
-            <tr><td class="border px-4 py-2">customText</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"BIENVENIDO/A"</td><td class="border px-4 py-2">Texto principal de bienvenida.</td></tr>
-            <tr><td class="border px-4 py-2">groupName</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Nombre del Grupo"</td><td class="border px-4 py-2">Nombre del grupo o comunidad.</td></tr>
-            <tr><td class="border px-4 py-2">avatarUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Default</td><td class="border px-4 py-2">Imagen de avatar (redondo).</td></tr>
-            <tr><td class="border px-4 py-2">logoUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Default</td><td class="border px-4 py-2">Logo pequeño a la derecha del grupo.</td></tr>
+            <tr><td class="border px-4 py-2">username</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Kullanıcı Adı"</td><td class="border px-4 py-2">Gösterilecek isim.</td></tr>
+            <tr><td class="border px-4 py-2">customText</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"HOŞGELDİN"</td><td class="border px-4 py-2">Ana karşılama yazısı.</td></tr>
+            <tr><td class="border px-4 py-2">groupName</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Grup Adı"</td><td class="border px-4 py-2">Grup veya topluluk adı.</td></tr>
+            <tr><td class="border px-4 py-2">avatarUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Varsayılan</td><td class="border px-4 py-2">Yuvarlak avatar görseli.</td></tr>
+            <tr><td class="border px-4 py-2">logoUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Varsayılan</td><td class="border px-4 py-2">Grup sağında küçük logo.</td></tr>
           </tbody>
         </table>
       </section>
@@ -75,30 +75,30 @@
       <!-- ========== ENDPOINT: CUTE-CALENDAR ========== -->
       <section>
         <h2 class="text-3xl font-semibold text-green-600 mb-4">📅 /canvas/cute-calendar</h2>
-        <p class="mb-2">Genera un calendario mensual estilizado y responsivo con personajes decorativos.</p>
+        <p class="mb-2">Karakter süslemeli, şık ve duyarlı aylık takvim oluşturur.</p>
         <code class="block bg-gray-200 text-sm p-3 rounded mb-4">GET /canvas/cute-calendar</code>
 
-        <h3 class="text-xl font-semibold mb-2">Parámetros:</h3>
+        <h3 class="text-xl font-semibold mb-2">Parametreler:</h3>
         <table class="w-full text-left border-collapse border border-gray-300 mb-4">
           <thead class="bg-gray-200">
             <tr>
-              <th class="px-4 py-2 border">Parámetro</th>
-              <th class="px-4 py-2 border">Tipo</th>
-              <th class="px-4 py-2 border">Default</th>
-              <th class="px-4 py-2 border">Descripción</th>
+              <th class="px-4 py-2 border">Parametre</th>
+              <th class="px-4 py-2 border">Tip</th>
+              <th class="px-4 py-2 border">Varsayılan</th>
+              <th class="px-4 py-2 border">Açıklama</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td class="border px-4 py-2">lang</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"es"</td><td class="border px-4 py-2">Idioma del mes y días.</td></tr>
-            <tr><td class="border px-4 py-2">country</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"MX"</td><td class="border px-4 py-2">Define si el calendario empieza en lunes o domingo.</td></tr>
-            <tr><td class="border px-4 py-2">month</td><td class="border px-4 py-2">int</td><td class="border px-4 py-2">Actual</td><td class="border px-4 py-2">Número del mes (1-12).</td></tr>
-            <tr><td class="border px-4 py-2">year</td><td class="border px-4 py-2">int</td><td class="border px-4 py-2">Actual</td><td class="border px-4 py-2">Año del calendario.</td></tr>
+            <tr><td class="border px-4 py-2">lang</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"tr"</td><td class="border px-4 py-2">Ay ve günlerin dili.</td></tr>
+            <tr><td class="border px-4 py-2">country</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"TR"</td><td class="border px-4 py-2">Takvimin pazartesi veya pazar ile başlamasını belirler.</td></tr>
+            <tr><td class="border px-4 py-2">month</td><td class="border px-4 py-2">int</td><td class="border px-4 py-2">Güncel</td><td class="border px-4 py-2">Ay numarası (1-12).</td></tr>
+            <tr><td class="border px-4 py-2">year</td><td class="border px-4 py-2">int</td><td class="border px-4 py-2">Güncel</td><td class="border px-4 py-2">Takvim yılı.</td></tr>
           </tbody>
         </table>
       </section>
 
-      <footer class="text-center mt-20 te<xt-sm text-gray-500">
-        Hecho con por <a href="https://adfay.io">Adfay Inc.</a> | MIT License
+      <footer class="text-center mt-20 text-sm text-gray-500">
+        Hazırlayan <a href="https://adfay.io">Adfay Inc.</a> | MIT License
       </footer>
     </div>
   </body>
