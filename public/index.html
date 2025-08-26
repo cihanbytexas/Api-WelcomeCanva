@@ -1,96 +1,175 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Welcome Image API</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { scroll-behavior: smooth; background: linear-gradient(to bottom right, #f0f4f8, #e2e8f0); }
-    .accordion { cursor: pointer; transition: all 0.3s ease; }
-    .accordion:hover { transform: translateY(-3px); }
-    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-    .fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
-    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
-  </style>
-</head>
-<body class="font-sans text-gray-800">
+<meta charset="UTF-8">
+<title>Welcome Image API</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  margin:0;
+  padding:0;
+  background: linear-gradient(270deg,#6366f1,#ec4899,#22d3ee,#facc15);
+  background-size: 800% 800%;
+  animation: gradientBG 20s ease infinite;
+  scroll-behavior: smooth;
+  color:#1f2937;
+}
+@keyframes gradientBG {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 
-<div class="max-w-6xl mx-auto p-8">
-  <!-- Hero Section -->
-  <header class="text-center mb-16">
-    <h1 class="text-5xl font-bold text-indigo-600 fade-in">Welcome Image API</h1>
-    <p class="mt-4 text-lg fade-in" style="animation-delay: 0.2s;">Hoş geldin görselleri ve takvimler oluştur.</p>
+/* Accordion */
+.accordion { cursor: pointer; transition: all 0.3s ease; border-radius:0.5rem; }
+.accordion:hover { transform: translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.15);}
+.accordion-content { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.5s ease, opacity 0.5s ease; }
+.accordion-content.show { opacity: 1; }
+.fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
+@keyframes fadeIn { to {opacity:1; transform:translateY(0);} }
+
+.accordion h2 {
+  background: linear-gradient(90deg,#6366f1,#ec4899,#22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.accordion span { font-weight:bold; transition: transform 0.3s; }
+.accordion span.rotate { transform: rotate(45deg); }
+
+/* Sol Menü */
+#dev-menu { position: fixed; left: 1rem; top: 50%; transform: translateY(-50%); z-index: 50; }
+#dev-btn { background:#1f2937; color:white; padding:0.5rem 1rem; border-radius:9999px 0 0 9999px; cursor:pointer; transition:all 0.3s; }
+#dev-btn:hover { background:#111827; transform:scale(1.05);}
+#dev-content { display:none; background:white; box-shadow:0 8px 20px rgba(0,0,0,0.2); border-radius:0.5rem; padding:1rem; width:240px; margin-top:0.5rem; transition: all 0.3s ease; }
+#dev-content.show { display:block; animation: fadeSlide 0.3s forwards;}
+@keyframes fadeSlide { from {opacity:0; transform: translateY(-10px);} to {opacity:1; transform: translateY(0);} }
+
+/* Endpoint hover efekt */
+.accordion:hover h2 { background: linear-gradient(90deg,#facc15,#22d3ee,#ec4899); }
+
+footer { text-align:center; margin-top:3rem; font-size:0.875rem; color:#6b7280;}
+
+/* Responsive ayarlar */
+@media (max-width:768px){
+  #dev-menu { top:auto; bottom:1rem; left:auto; right:1rem; transform:none; }
+  #dev-btn { border-radius:9999px; }
+  #dev-content { width:90vw; right:1rem; bottom:3.5rem; margin-top:0; }
+  .accordion h2 { font-size:1.25rem; }
+  .accordion-content code { font-size:0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="max-w-6xl mx-auto p-4 sm:p-8">
+  <header class="text-center mb-12 sm:mb-16">
+    <h1 class="text-4xl sm:text-5xl font-bold text-indigo-600 fade-in">Welcome Image API</h1>
+    <p class="mt-2 sm:mt-4 text-md sm:text-lg fade-in" style="animation-delay:0.2s;">Hoşgeldin görselleri ve takvimler oluştur.</p>
   </header>
 
-  <div class="space-y-6">
-
-    <!-- Generate Welcome -->
-    <div class="bg-white shadow-md rounded-lg p-6 accordion">
+  <div class="space-y-4 sm:space-y-6">
+    <div class="bg-white shadow-md p-4 sm:p-6 accordion">
       <div class="flex justify-between items-center">
-        <h2 class="text-2xl font-semibold text-indigo-700">🧾 /canvas/generate-welcome</h2>
-        <span class="text-indigo-500 text-xl">+</span>
+        <h2 class="text-xl sm:text-2xl font-semibold">🧾 /canvas/generate-welcome</h2>
+        <span class="text-lg sm:text-xl text-indigo-500">+</span>
       </div>
-      <div class="accordion-content mt-4">
+      <div class="accordion-content mt-3">
         <p>Standart hoş geldin görseli.</p>
-        <code class="block bg-gray-100 text-sm p-3 rounded mb-4">GET /canvas/generate-welcome</code>
-        <table class="w-full text-left border-collapse border border-gray-300 mb-4">
-          <thead class="bg-gray-200">
-            <tr>
-              <th class="px-4 py-2 border">Parametre</th>
-              <th class="px-4 py-2 border">Tip</th>
-              <th class="px-4 py-2 border">Varsayılan</th>
-              <th class="px-4 py-2 border">Açıklama</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="border px-4 py-2">username</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Kullanıcı"</td><td class="border px-4 py-2">Kullanıcının adı.</td></tr>
-            <tr><td class="border px-4 py-2">avatarUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Varsayılan</td><td class="border px-4 py-2">Kullanıcı avatar URL’si.</td></tr>
-            <tr><td class="border px-4 py-2">backgroundUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Varsayılan</td><td class="border px-4 py-2">Özel arka plan resmi.</td></tr>
-            <tr><td class="border px-4 py-2">logoUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Yok</td><td class="border px-4 py-2">Sağ üst köşede logo.</td></tr>
-            <tr><td class="border px-4 py-2">textColor</td><td class="border px-4 py-2">hex</td><td class="border px-4 py-2">#FFFFFF</td><td class="border px-4 py-2">Yazı rengi.</td></tr>
-            <tr><td class="border px-4 py-2">borderColor</td><td class="border px-4 py-2">hex</td><td class="border px-4 py-2">#FF0000</td><td class="border px-4 py-2">Avatar çerçevesi rengi.</td></tr>
-            <tr><td class="border px-4 py-2">customText</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Bizimle olduğun için teşekkürler"</td><td class="border px-4 py-2">Ana metin.</td></tr>
-            <tr><td class="border px-4 py-2">welcomeText</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Hoş geldin"</td><td class="border px-4 py-2">Başlık yazısı.</td></tr>
-          </tbody>
-        </table>
+        <code>GET /canvas/generate-welcome</code>
       </div>
     </div>
 
-    <!-- Cute Welcome -->
-    <div class="bg-white shadow-md rounded-lg p-6 accordion">
+    <div class="bg-white shadow-md p-4 sm:p-6 accordion">
       <div class="flex justify-between items-center">
-        <h2 class="text-2xl font-semibold text-pink-600">🐰 /canvas/cute-welcome</h2>
-        <span class="text-pink-500 text-xl">+</span>
+        <h2 class="text-xl sm:text-2xl font-semibold">🐰 /canvas/cute-welcome</h2>
+        <span class="text-lg sm:text-xl text-pink-500">+</span>
       </div>
-      <div class="accordion-content mt-4">
-        <p>Kawaii tarzında hoş geldin görseli, yuvarlak avatar ve koyu arka plan.</p>
-        <code class="block bg-gray-100 text-sm p-3 rounded mb-4">GET /canvas/cute-welcome</code>
-        <table class="w-full text-left border-collapse border border-gray-300 mb-4">
-          <thead class="bg-gray-200">
-            <tr>
-              <th class="px-4 py-2 border">Parametre</th>
-              <th class="px-4 py-2 border">Tip</th>
-              <th class="px-4 py-2 border">Varsayılan</th>
-              <th class="px-4 py-2 border">Açıklama</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="border px-4 py-2">username</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Kullanıcı Adı"</td><td class="border px-4 py-2">Gösterilecek isim.</td></tr>
-            <tr><td class="border px-4 py-2">customText</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"HOŞ GELDİN"</td><td class="border px-4 py-2">Ana karşılama yazısı.</td></tr>
-            <tr><td class="border px-4 py-2">groupName</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">"Grup Adı"</td><td class="border px-4 py-2">Grup veya topluluk adı.</td></tr>
-            <tr><td class="border px-4 py-2">avatarUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Varsayılan</td><td class="border px-4 py-2">Yuvarlak avatar görseli.</td></tr>
-            <tr><td class="border px-4 py-2">logoUrl</td><td class="border px-4 py-2">string</td><td class="border px-4 py-2">Varsayılan</td><td class="border px-4 py-2">Grup sağında küçük logo.</td></tr>
-          </tbody>
-        </table>
+      <div class="accordion-content mt-3">
+        <p>Kawaii tarzında hoş geldin görseli.</p>
+        <code>GET /canvas/cute-welcome</code>
       </div>
     </div>
 
-    <!-- Cute Calendar -->
-    <div class="bg-white shadow-md rounded-lg p-6 accordion">
+    <div class="bg-white shadow-md p-4 sm:p-6 accordion">
       <div class="flex justify-between items-center">
-        <h2 class="text-2xl font-semibold text-green-600">📅 /canvas/cute-calendar</h2>
-        <span class="text-green-500 text-xl">+</span>
+        <h2 class="text-xl sm:text-2xl font-semibold">📅 /canvas/cute-calendar</h2>
+        <span class="text-lg sm:text-xl text-green-500">+</span>
       </div>
-      <div class="accordion-content mt-4">
-        <p>Karakter süslemeli
+      <div class="accordion-content mt-3">
+        <p>Karakter süslemeli, şık ve duyarlı aylık takvim oluşturur.</p>
+        <code>GET /canvas/cute-calendar</code>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    TEXAS tarafından hazırlanmıştır
+  </footer>
+</div>
+
+<!-- Sol Menü -->
+<div id="dev-menu">
+  <button id="dev-btn">Geliştirici</button>
+  <div id="dev-content">
+    <p class="text-gray-500 text-sm">Yükleniyor...</p>
+  </div>
+</div>
+
+<script>
+// Accordion
+document.querySelectorAll('.accordion').forEach(acc=>{
+  const header = acc.querySelector('h2');
+  const icon = acc.querySelector('span');
+  const content = acc.querySelector('.accordion-content');
+  header.addEventListener('click',()=>{
+    if(content.classList.contains('show')){
+      content.style.maxHeight = null;
+      content.classList.remove('show');
+      icon.textContent='+';
+    }else{
+      content.style.maxHeight = content.scrollHeight+'px';
+      content.classList.add('show');
+      icon.textContent='−';
+    }
+  });
+});
+
+// Sol menü ve Discord API entegrasyonu
+const devBtn = document.getElementById('dev-btn');
+const devContent = document.getElementById('dev-content');
+
+devBtn.addEventListener('click', () => {
+  devContent.classList.toggle('show');
+  if(!devContent.dataset.loaded){
+    fetch('https://bdfddata.rickyjs.xyz/release/user', {
+      headers: {
+        'apikey': 'Gy3tWxAJdgWWbh0lUyrMf3cGbR6gf9ftF5OpoWIv7XERlx1JsR',
+        'user-id': '964149536631189504'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      const user = data.details;
+      devContent.innerHTML = `
+        <div class="flex items-center space-x-2">
+          <img class="w-12 h-12 rounded-full" src="${user.avatar}">
+          <div>
+            <p class="font-semibold text-indigo-700">${user.username}</p>
+            <p class="text-sm text-gray-500">#${user.discriminator}</p>
+          </div>
+        </div>
+      `;
+      devContent.dataset.loaded = "true";
+    })
+    .catch(err => {
+      devContent.innerHTML = `<p class="text-red-500 text-sm">API hatası</p>`;
+      console.error(err);
+    });
+  }
+});
+</script>
+
+</body>
+</html>
