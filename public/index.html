@@ -2,134 +2,205 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Welcome Image API</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-body { margin:0; font-family:sans-serif; background:#f3f4f6; color:#1f2937; }
-.container { max-width:6xl; margin:auto; padding:1rem; }
+body {
+  font-family: 'Inter', sans-serif;
+  margin:0;
+  padding:0;
+  background: linear-gradient(120deg,#6366f1,#ec4899,#22d3ee,#facc15);
+  background-size: 800% 800%;
+  animation: gradientBG 25s ease infinite;
+  scroll-behavior: smooth;
+  color:#1f2937;
+}
+@keyframes gradientBG {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* Fade In */
+.fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
+@keyframes fadeIn { to {opacity:1; transform:translateY(0);} }
 
 /* Accordion */
-.accordion { cursor:pointer; transition:all 0.3s; background:white; padding:1rem; border-radius:0.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-bottom:1rem;}
-.accordion-header { display:flex; justify-content:space-between; align-items:center; }
-.accordion-header span { font-weight:bold; transition: transform 0.3s; }
-.accordion-content { max-height:0; overflow:hidden; opacity:0; transition:max-height 0.5s ease, opacity 0.5s ease; }
-.accordion-content.show { max-height:1000px; opacity:1; }
+.accordion {
+  cursor:pointer;
+  transition: all 0.3s ease;
+  border-radius:1rem;
+  overflow:hidden;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
+  box-shadow:0 8px 25px rgba(0,0,0,0.25);
+  padding:1rem 1.5rem;
+  margin-bottom:1rem;
+}
+.accordion:hover { transform: translateY(-4px); box-shadow:0 12px 35px rgba(0,0,0,0.35);}
+.accordion-content {
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:max-height 0.5s ease, opacity 0.5s ease;
+  background: linear-gradient(135deg,#fff7ed,#e0f7fa,#f0f5ff);
+  border-radius:0 0 1rem 1rem;
+  padding:0 1rem;
+}
+.accordion-content.show { opacity:1; max-height:1200px; transition:max-height 0.5s ease, opacity 0.5s ease; }
 
-/* Sol Menü */
-#dev-menu { position:fixed; top:50%; left:0; transform:translateY(-50%); z-index:50; }
-#dev-btn { background:#111827; color:white; padding:0.5rem 1rem; border-radius:0 0.5rem 0.5rem 0; cursor:pointer; }
-#dev-btn:hover { background:#1f2937; }
-#dev-content { display:none; background:white; box-shadow:0 5px 15px rgba(0,0,0,0.2); border-radius:0.5rem; padding:1rem; width:250px; }
-#dev-content.show { display:block; }
-#dev-content img.banner { width:100%; border-radius:0.5rem; margin-bottom:0.5rem; }
-#dev-content img.avatar { width:64px; height:64px; border-radius:9999px; margin-bottom:0.5rem; }
-#dev-content .username { font-weight:bold; }
-#dev-content .tag { color:#6b7280; font-size:0.875rem; }
-#dev-content ul { margin-top:0.5rem; padding-left:1rem; list-style-type:disc; font-size:0.875rem; color:#374151; }
+.accordion h2 {
+  font-size:1.6rem;
+  background: linear-gradient(90deg,#ff6ec4,#7873f5,#42e695);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.5s ease;
+}
+.accordion h2.animate-title { transform: translateX(10px); color:#111 !important; }
+
+.accordion span {
+  font-weight:bold;
+  transition: transform 0.3s, color 0.3s;
+  display:inline-block;
+}
+.accordion span.rotate { transform: rotate(45deg); }
+
+/* Table styling */
+table { width:100%; border-collapse: collapse; margin-top:0.5rem; }
+thead { background: rgba(255,255,255,0.3); }
+th, td { border:1px solid rgba(31,41,55,0.2); padding:0.35rem 0.6rem; text-align:left; border-radius:0.5rem; }
+tbody tr { background: rgba(255,255,255,0.6); transition: all 0.3s; opacity:0; transform:translateY(15px) scale(0.95); }
+tbody tr:hover { background: rgba(255,255,255,0.85); transform: translateX(5px) scale(1); }
+
+/* Footer */
+footer { text-align:center; margin-top:3rem; font-size:0.875rem; color:#6b7280;}
 
 /* Responsive */
-@media(max-width:768px){
-  #dev-menu { top:auto; bottom:1rem; left:auto; right:1rem; transform:none; }
-  #dev-btn { border-radius:9999px; }
-  #dev-content { width:90vw; right:1rem; bottom:3.5rem; margin-top:0; }
+@media (max-width:768px){
+  .accordion h2 { font-size:1.3rem; }
+  table { font-size:0.75rem; }
 }
-table { width:100%; border-collapse: collapse; margin-top:0.5rem; }
-th, td { border:1px solid #d1d5db; padding:0.25rem 0.5rem; text-align:left; }
-thead { background:#e5e7eb; }
+
+/* Row fade+slide+scale animation */
+@keyframes fadeRow { from {opacity:0; transform: translateY(15px) scale(0.95);} to {opacity:1; transform: translateY(0) scale(1);} }
 </style>
 </head>
 <body>
-<div class="container">
-  <header class="text-center mb-12">
-    <h1 class="text-4xl font-bold text-indigo-600">Welcome Image API</h1>
-    <p class="mt-2 text-md">Hoşgeldin görselleri ve takvimler oluştur.</p>
+
+<div class="max-w-6xl mx-auto p-4 sm:p-8">
+  <header class="text-center mb-12 sm:mb-16">
+    <h1 class="text-4xl sm:text-5xl font-bold text-indigo-600 fade-in">Welcome Image API</h1>
+    <p class="mt-2 sm:mt-4 text-md sm:text-lg fade-in" style="animation-delay:0.2s;">Hoşgeldin görselleri ve takvimler oluştur.</p>
   </header>
 
-  <!-- Accordion Başlangıç -->
-  <div class="accordion">
-    <div class="accordion-header">
-      <h2>🧾 /canvas/generate-welcome</h2>
-      <span>+</span>
+  <div class="space-y-6">
+
+    <!-- /canvas/generate-welcome -->
+    <div class="accordion">
+      <div class="flex justify-between items-center">
+        <h2>🧾 /canvas/generate-welcome</h2>
+        <span class="text-indigo-600">+</span>
+      </div>
+      <div class="accordion-content mt-3">
+        <p>Standart hoş geldin görseli.</p>
+        <code>GET /canvas/generate-welcome</code>
+        <table>
+          <thead>
+            <tr><th>Parametre</th><th>Tip</th><th>Varsayılan</th><th>Açıklama</th></tr>
+          </thead>
+          <tbody>
+            <tr style="animation-delay:0.1s"><td>username</td><td>string</td><td>"Kullanıcı"</td><td>Kullanıcının adı.</td></tr>
+            <tr style="animation-delay:0.2s"><td>avatarUrl</td><td>string</td><td>Varsayılan</td><td>Kullanıcı avatarının URL’si.</td></tr>
+            <tr style="animation-delay:0.3s"><td>backgroundUrl</td><td>string</td><td>Varsayılan</td><td>Özel arka plan resmi.</td></tr>
+            <tr style="animation-delay:0.4s"><td>welcomeText</td><td>string</td><td>"Hoş Geldin"</td><td>Başlık yazısı.</td></tr>
+            <tr style="animation-delay:0.5s"><td>customText</td><td>string</td><td>"Bizimle olduğun için teşekkürler"</td><td>Ana metin.</td></tr>
+            <tr style="animation-delay:0.6s"><td>logoUrl</td><td>string</td><td>Yok</td><td>Sağ üst köşede logo.</td></tr>
+            <tr style="animation-delay:0.7s"><td>textColor</td><td>hex</td><td>#FFFFFF</td><td>Yazı rengi.</td></tr>
+            <tr style="animation-delay:0.8s"><td>borderColor</td><td>hex</td><td>#FF0000</td><td>Avatar çerçevesi rengi.</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="accordion-content">
-      <p>Standart hoş geldin görseli.</p>
-      <code>GET /canvas/generate-welcome</code>
-      <table>
-        <thead><tr><th>Parametre</th><th>Tip</th><th>Varsayılan</th><th>Açıklama</th></tr></thead>
-        <tbody>
-          <tr><td>username</td><td>string</td><td>"Kullanıcı"</td><td>Kullanıcının adı.</td></tr>
-          <tr><td>avatarUrl</td><td>string</td><td>Varsayılan</td><td>Kullanıcı avatar URL'si.</td></tr>
-          <tr><td>backgroundUrl</td><td>string</td><td>Varsayılan</td><td>Özel arka plan resmi.</td></tr>
-          <tr><td>welcomeText</td><td>string</td><td>"Hoş Geldin"</td><td>Başlık yazısı.</td></tr>
-          <tr><td>customText</td><td>string</td><td>"Bizimle olduğun için teşekkürler"</td><td>Ana metin.</td></tr>
-          <tr><td>logoUrl</td><td>string</td><td>Yok</td><td>Sağ üst köşede logo.</td></tr>
-          <tr><td>textColor</td><td>hex</td><td>#FFFFFF</td><td>Yazı rengi.</td></tr>
-          <tr><td>borderColor</td><td>hex</td><td>#FF0000</td><td>Avatar çerçevesi rengi.</td></tr>
-        </tbody>
-      </table>
+
+    <!-- /canvas/cute-welcome -->
+    <div class="accordion">
+      <div class="flex justify-between items-center">
+        <h2>🐰 /canvas/cute-welcome</h2>
+        <span class="text-pink-500">+</span>
+      </div>
+      <div class="accordion-content mt-3">
+        <p>Kawaii tarzında hoş geldin görseli.</p>
+        <code>GET /canvas/cute-welcome</code>
+        <table>
+          <thead>
+            <tr><th>Parametre</th><th>Tip</th><th>Varsayılan</th><th>Açıklama</th></tr>
+          </thead>
+          <tbody>
+            <tr style="animation-delay:0.1s"><td>username</td><td>string</td><td>"Kullanıcı Adı"</td><td>Gösterilecek isim.</td></tr>
+            <tr style="animation-delay:0.2s"><td>customText</td><td>string</td><td>"HOŞGELDİN"</td><td>Ana karşılama yazısı.</td></tr>
+            <tr style="animation-delay:0.3s"><td>groupName</td><td>string</td><td>"Grup Adı"</td><td>Grup veya topluluk adı.</td></tr>
+            <tr style="animation-delay:0.4s"><td>avatarUrl</td><td>string</td><td>Varsayılan</td><td>Yuvarlak avatar görseli.</td></tr>
+            <tr style="animation-delay:0.5s"><td>logoUrl</td><td>string</td><td>Varsayılan</td><td>Grup sağında küçük logo.</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+
+    <!-- /canvas/cute-calendar -->
+    <div class="accordion">
+      <div class="flex justify-between items-center">
+        <h2>📅 /canvas/cute-calendar</h2>
+        <span class="text-green-500">+</span>
+      </div>
+      <div class="accordion-content mt-3">
+        <p>Karakter süslemeli, şık ve duyarlı aylık takvim.</p>
+        <code>GET /canvas/cute-calendar</code>
+        <table>
+          <thead>
+            <tr><th>Parametre</th><th>Tip</th><th>Varsayılan</th><th>Açıklama</th></tr>
+          </thead>
+          <tbody>
+            <tr style="animation-delay:0.1s"><td>lang</td><td>string</td><td>"tr"</td><td>Ay ve günlerin dili.</td></tr>
+            <tr style="animation-delay:0.2s"><td>theme</td><td>string</td><td>"cute"</td><td>Takvimin temasını belirler (cute, pastel, neon).</td></tr>
+            <tr style="animation-delay:0.3s"><td>avatarUrl</td><td>string</td><td>Varsayılan</td><td>Yuvarlak avatar görseli takvime eklenir.</td></tr>
+            <tr style="animation-delay:0.4s"><td>highlightColor</td><td>hex</td><td>#FFB6C1</td><td>Özel günlerin vurgulanma rengi.</td></tr>
+            <tr style="animation-delay:0.5s"><td>showHolidays</td><td>boolean</td><td>true</td><td>Resmi tatilleri gösterip göstermeyeceğini belirler.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
-  <!-- Diğer endpointler aynı mantıkla kopyalanabilir -->
 </div>
 
-<!-- Sol Menü -->
-<div id="dev-menu">
-  <div id="dev-btn">Geliştirici</div>
-  <div id="dev-content">
-    <img class="banner" id="banner" src="" alt="Banner">
-    <img class="avatar" id="avatar" src="" alt="Avatar">
-    <div class="username" id="username"></div>
-    <div class="tag" id="tag"></div>
-    <ul id="flags"></ul>
-  </div>
-</div>
+<footer>© 2025 Welcome Image API</footer>
 
 <script>
-// Accordion
-document.querySelectorAll('.accordion').forEach(acc=>{
-  acc.querySelector('.accordion-header').addEventListener('click',()=>{
-    const content = acc.querySelector('.accordion-content');
-    content.classList.toggle('show');
-    const span = acc.querySelector('span');
-    span.textContent = content.classList.contains('show') ? '−' : '+';
+// Accordion açma/kapatma ve row animasyonu
+document.querySelectorAll('.accordion').forEach(item => {
+  const btn = item.querySelector('span');
+  const content = item.querySelector('.accordion-content');
+  const title = item.querySelector('h2');
+  const rows = content.querySelectorAll('tbody tr');
+
+  btn.addEventListener('click', () => {
+    const isOpen = content.classList.toggle('show');
+    btn.textContent = isOpen ? '-' : '+';
+    title.classList.toggle('animate-title', isOpen);
+    btn.classList.toggle('rotate', isOpen);
+
+    if(isOpen){
+      rows.forEach((row,i)=>{
+        row.style.animation = `fadeRow 0.5s ${i*0.1}s forwards`;
+      });
+    } else {
+      rows.forEach(row=>{
+        row.style.animation = '';
+      });
+    }
   });
 });
-
-// Discord API
-const userId = "672215920558604332";
-const apiKey = "Gy3tWxAJdgWWbh0lUyrMf3cGbR6gf9ftF5OpoWIv7XERlx1JsR";
-const apiURL = `https://bdfddata.rickyjs.xyz/release/user`;
-
-document.getElementById('dev-btn').addEventListener('click', ()=>{
-  document.getElementById('dev-content').classList.toggle('show');
-});
-
-fetch(apiURL,{
-  headers: { "apikey": apiKey, "user-id": userId }
-})
-.then(res=>res.json())
-.then(data=>{
-  if(data.status===200 && data.details){
-    const details = data.details;
-    document.getElementById('avatar').src = details.avatar;
-    document.getElementById('banner').src = details.banner;
-    document.getElementById('username').textContent = details.username;
-    document.getElementById('tag').textContent = details.tag;
-    const flags = document.getElementById('flags');
-    flags.innerHTML="";
-    details.public_flags.forEach(f=>{
-      const li=document.createElement('li');
-      li.textContent=f;
-      flags.appendChild(li);
-    });
-  }
-})
-.catch(err=>console.error(err));
 </script>
 
-<footer class="text-center mt-12 text-sm text-gray-500">
-  TEXAS tarafından hazırlanmıştır.
-</footer>
 </body>
 </html>
